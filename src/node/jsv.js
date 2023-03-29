@@ -60,7 +60,7 @@ function isOnCorrectNetwork() {
 
 function run1Mon() {
     setDisplayOutput();
-    exec("sh ./linux-1-monitor.sh", (error, stdout, stderr) => {
+    exec("sh ../helper-scripts/linux-1-monitor.sh", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;
@@ -85,7 +85,7 @@ function safeRun1Mon() {
 }
 
 function run2Mon() {
-    exec("sh ./linux-2-monitor.sh", (error, stdout, stderr) => {
+    exec("sh ../helper-scripts/linux-2-monitor.sh", (error, stdout, stderr) => {
         if (error) {
             console.log(`error: ${error.message}`);
             return;

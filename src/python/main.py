@@ -6,14 +6,14 @@ import subprocess
 import pyautogui
 import time
 import json
-import winreg
 import xml.etree.ElementTree as ET
 
 hostName = "0.0.0.0"
 serverPort = 8080
 
 other_pc = []
-display_switch_path = "./displaySwitch.exe"
+display_switch_path = "C:/Users/thoma/Documents/Real Documents/Useful programs/DisplaySwitch.exe"
+monitor_info_path = "C:/Users/thoma/Documents/Real Documents/Useful programs/MonitorInfoView.exe"
 
 def hardware_screen_config():
     return get_hardware_config()
@@ -73,15 +73,6 @@ class WebServer(BaseHTTPRequestHandler):
 
             elif self.path == "/switch-screen-host" or self.path == "/switch-screen-host/":
                 print("Switch screen called")
-                #for addr in other_pc:
-                #    try:
-                #        r = requests.get(f"{addr}switch-screen-slave", timeout=0.5)
-                #        
-                #        if r.json["done"] == True:
-                #            continue
-                #    except:
-                #        print("address failed")
-                #r = requests.get(f"{other_pc[1]}switch-screen-slave", timeout=0.5)
                 global other_pc
                 res = query_other_pc(other_pc, "switch-screen-slave")
 
@@ -112,7 +103,7 @@ class WebServer(BaseHTTPRequestHandler):
 
 def get_monitor_count():
     final_path = os.path.expanduser("~/AUTOGENMONITORINFO.xml")
-    subprocess.call(['powershell', '-Command', f'.\MonitorInfoView.exe /sxml "{final_path}"'])
+    subprocess.call(['powershell', '-Command', f'{monitor_info_path} /sxml "{final_path}"'])
     tree = ET.parse(final_path)
     os.remove(final_path)
     root = tree.getroot()
@@ -205,10 +196,6 @@ def query_other_pc(other_pc, query):
 
 
 if __name__ == "__main__":
-
-    
-    
-    
     if platform.system() == "Windows":
         other_pc.append("http://192.168.0.108:8080/")
         other_pc.append("http://192.168.0.107:8080/")
