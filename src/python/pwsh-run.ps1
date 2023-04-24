@@ -1,2 +1,2 @@
-cd C:\Users\thoma\Dropbox\Projects\py-screen-switch
-python ./main.py
+cd C:\Users\thoma\Documents\GitHub\duo-screen-switch\src\helper-scripts
+python C:\Users\thoma\Documents\GitHub\duo-screen-switch\src\python\main.py

@@ -1,3 +1,3 @@
 #!/bin/sh
-cd /home/tom/Dropbox/Projects/py-screen-switch/
+cd /home/tom/Documents/GitHub/duo-screen-switch/src/node
 node ./jsv.js
