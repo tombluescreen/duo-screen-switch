@@ -8,12 +8,12 @@ import time
 import json
 import xml.etree.ElementTree as ET
 
-hostName = "0.0.0.0"
+hostName = "127.0.0.1"
 serverPort = 8080
 
 other_pc = []
-display_switch_path = "C:/Users/thoma/Documents/Real Documents/Useful programs/DisplaySwitch.exe"
-monitor_info_path = "C:/Users/thoma/Documents/Real Documents/Useful programs/MonitorInfoView.exe"
+display_switch_path = os.path.abspath("C:/Users/thoma/Documents/Real Documents/Useful programs/DisplaySwitch.exe")
+monitor_info_path = os.path.abspath("C:/Users/thoma/Documents/Real Documents/Useful programs/MonitorInfoView.exe")
 
 def hardware_screen_config():
     return get_hardware_config()
@@ -102,8 +102,8 @@ class WebServer(BaseHTTPRequestHandler):
         
 
 def get_monitor_count():
-    final_path = os.path.expanduser("~/AUTOGENMONITORINFO.xml")
-    subprocess.call(['powershell', '-Command', f'{monitor_info_path} /sxml "{final_path}"'])
+    final_path = os.path.expanduser("~\AUTOGENMONITORINFO.xml")
+    subprocess.call([f'{monitor_info_path}', '/sxml', f'{final_path}'])
     tree = ET.parse(final_path)
     os.remove(final_path)
     root = tree.getroot()
@@ -125,7 +125,7 @@ def switch_display_input():
 def switch_to_extended():
     print(platform.system())
     if platform.system() == "Windows":
-        subprocess.Popen(['powershell', '-Command', f'{display_switch_path} /extend'])
+        subprocess.Popen([f'{display_switch_path}','/extend'])
         
     elif platform.system() == "Linux":
         print("Linux - NOT SUPPORTED")
@@ -140,7 +140,7 @@ def switch_to_solo():
         
         time.sleep(8)
         
-        subprocess.Popen(['powershell', '-Command', f'{display_switch_path} /external'])
+        subprocess.Popen([f'{display_switch_path}' ,'/external'])
         
 
 def switch_to_solo_old():
